@@ -32,23 +32,59 @@ Chi tiết phiếu (tất cả). <br>
 Quản lý doanh mục: role, department, fundcategory, products. <br>
 c) Sơ đồ Routes
 1. Dành cho Members. <br>
-Login -> Dashboard -> Events\Eventdetail\::slug\regisEvent <br>
+Login -> Dashboard -> Events <br>
+                   -> Events\Eventdetail\::slug\regisEvent <br>
                    -> Events\Eventdetail\::slug\check_in <br>
+                   -> Members <br>
                    -> Members\Memberdetail\::slug\edit <br>
+                   -> Funds
                    -> Funds\create <br>
                    -> Funds\Fundetail <br>
 2. Dành cho Chủ nhiệm. <br>
-Login -> Dashboard -> Events\Create <br>
+Login -> Dashboard -> Events <br>
+                   -> Events\Create <br>
                    -> Events\Cancel <br>
+                   -> Events\Eventdetail\::slug <br>
                    -> Events\Eventdetail\::slug\edit <br>
                    -> Events\Eventdetail\::slug\regisEvent <br>
                    -> Events\Eventdetail\::slug\check_in <br>
                    -> Events\Eventdetail\::slug\make_check_in <br>
+                   -> Events\Eventdetail\::slug\approve
+                   -> Members <br>
+                   -> Members\Memberdetail\::slug <br>
                    -> Members\Memberdetail\::slug\edit <br>
                    -> Funds\create <br>
                    -> Funds\Fundetail <br>
                    -> Funds\Fundetail\edit <br>
                    -> Funds\Fundetail\delete <br>
 3. Dành cho Trường Ban. <br>
-
+Login -> Dashboard -> Events <br>
+                   -> Events\Create <br>
+                   -> Events\Cancel <br>
+                   -> Events\Eventdetail\::slug <br>
+                   -> Events\Eventdetail\::slug\edit <br>
+                   -> Events\Eventdetail\::slug\regisEvent <br>
+                   -> Events\Eventdetail\::slug\check_in <br>
+                   -> Events\Eventdetail\::slug\make_check_in <br>
+                   -> Events\Eventdetail\::slug\approve
+                   -> Members <br>
+                   -> Members\Memberdetail\::slug <br>
+                   -> Members\Memberdetail\::slug\edit <br>
+                   -> Funds\create <br>
+                   -> Funds\Fundetail <br>
+4. Dành cho Quỹ <br>
+Login -> Dashboard -> Events <br>
+                   -> Events\Create <br>
+                   -> Events\Cancel <br>
+                   -> Events\Eventdetail\::slug <br>
+                   -> Events\Eventdetail\::slug\edit <br>
+                   -> Events\Eventdetail\::slug\regisEvent <br>
+                   -> Events\Eventdetail\::slug\check_in <br>
+                   -> Events\Eventdetail\::slug\make_check_in <br>
+                   -> Events\Eventdetail\::slug\approve
+                   -> Members <br>
+                   -> Members\Memberdetail\::slug <br>
+                   -> Members\Memberdetail\::slug\edit <br>
+                   -> Funds\create <br>
+                   -> Funds\Fundetail <br>
    
