@@ -29,6 +29,7 @@ Check-in (do người tạo phân công). <br>
 Danh sách phiếu quỹ (level cao). <br>
 Tạo phiếu thu chi (tất cả). <br>
 Chi tiết phiếu (tất cả). <br>
+Tạo tiểu bang trong sự kiện (dành cho level cao). <br>
 Quản lý doanh mục: role, department, fundcategory, products. <br>
 c) Sơ đồ Routes
 1. Dành cho Members. <br>
