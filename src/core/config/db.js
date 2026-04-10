@@ -1,26 +1,25 @@
-// File: config/db.js
+// File: src/core/config/db.js
 const mysql = require('mysql2');
 
-// Tạo hồ chứa kết nối (Connection Pool)
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     waitForConnections: true,
-    connectionLimit: 10, // Giới hạn tối đa 10 kết nối đồng thời (đủ cho quy mô CLB)
-    queueLimit: 0        // Không giới hạn số lượng request đứng xếp hàng chờ
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-// Kiểm tra kết nối ngay khi khởi động
+// Test kết nối ngay khi file này được gọi
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('❌ Lỗi kết nối Database:', err.message);
+        console.error('❌ [DATABASE] Lỗi kết nối MySQL:', err.message);
     } else {
-        console.log('✅ Đã kết nối thành công tới MySQL Database!');
-        connection.release(); // Trả nhân viên về lại Pool sau khi test xong
+        console.log('✅ [DATABASE] Đã kết nối thành công tới MySQL!');
+        connection.release();
     }
 });
 
-// Xuất pool ra dưới dạng Promise để các Controller dùng async/await
+// Xuất ra dưới dạng Promise để dùng async/await cho sướng
 module.exports = pool.promise();

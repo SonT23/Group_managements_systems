@@ -1,27 +1,45 @@
-// 1. MỞ KHÓA KÉT SẮT ĐẦU TIÊN (Phải nằm trên cùng)
-require('dotenv').config();
-
-// 2. IMPORT VŨ KHÍ
+// File: src/app.js
 const express = require('express');
-const { engine } = require('express-handlebars'); // Cú pháp mới
-// const cors = require('cors'); // Chỉ mở ra nếu bạn thực sự cài thư viện cors
+const { engine } = require('express-handlebars');
+const path = require('path');
 
-// 3. KHỞI TẠO APP VÀ KẾT NỐI DB
 const app = express();
-const db = require('./core/config/db'); // Chạy dòng này là DB tự động test kết nối
 
-// 4. CẤU HÌNH GIAO DIỆN HANDLEBARS
-app.engine('hbs', engine({ extname: '.hbs' })); // Đổi đuôi file thành .hbs cho ngắn
-app.set('view engine', 'hbs');
-app.set('views', './views'); // Chỉ đường dẫn tới thư mục views
-
-// 5. MIDDLEWARE XỬ LÝ DỮ LIỆU & FILE TĨNH
+// ========================================================
+// 1. MIDDLEWARE CHUẨN MỰC (Phiên dịch dữ liệu)
+// ========================================================
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // Mở cửa thư mục public để file HTML đọc được file style.css
 
-// 6. CHẠY SERVER
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`🚀 iCREAL ERP Server đang chạy uy lực tại: http://localhost:${port}`);
+// ========================================================
+// 2. CẤU HÌNH ĐƯỜNG DẪN TÀI NGUYÊN (Hybrid Architecture)
+// ========================================================
+// Vì app.js đang nằm trong 'src', ta phải lùi ra 1 bước ('..') 
+// để chạm tới thư mục 'views' và 'public' nằm ngoài cùng.
+const viewsPath = path.join(__dirname, '..', 'views');
+const publicPath = path.join(__dirname, '..', 'public');
+
+app.use(express.static(publicPath));
+
+// ========================================================
+// 3. CẤU HÌNH HANDLEBARS
+// ========================================================
+app.engine('hbs', engine({ extname: '.hbs' }));
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
+
+// ========================================================
+// 4. ROUTE KIỂM TRA SỨC KHỎE (Health Check)
+// ========================================================
+// Dùng để test xem Server có sống không trước khi viết Logic phức tạp
+app.get('/ping', (req, res) => {
+    res.status(200).json({ message: 'Pong! Trái tim iCREAL ERP đang đập rất khỏe!' });
 });
+
+// ========================================================
+// 5. NƠI GẮN CÁC MODULES (Sẽ mở khóa sau)
+// ========================================================
+const masterRouter = require('./modules'); 
+app.use('/api', masterRouter);
+// Xuất app ra để server.js có thể gọi
+module.exports = app;
